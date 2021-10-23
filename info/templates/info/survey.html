@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>IO21</title>
+    <!-- <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'info/styles/survey.css' %}">
+  </head>
+  <body>
+    <div class="main-block">
+      <h1>Survey</h1>
+      <form action="{% url 'info:submit' %}" method="post">
+        {% csrf_token %}
+        {% if error_message %}<p>{{ error_message }}</p>{% endif %}
+        <div class="info">
+          <div class="info-item">
+            <label class="icon" for="fname"><i class="fas fa-user"></i></label>
+            <input type="text" class="input-text" name="fname" id="fname" placeholder="First name" required/>
+          </div>
+          <div class="info-item">
+            <input type="text" class="input-only-text" name="lname" id="lname" placeholder="Last name" required/>
+          </div>
+          <div  class="info-item">
+            <label class="icon" for="org"><i class="fas fa-globe"></i></label>
+            <input type="text" class="input-text" name="org" id="org" placeholder="Organization" required/>
+          </div>
+          <div  class="info-item">
+            <label class="icon" for="profession"><i class="fas fa-briefcase"></i></label>
+            <input type="text" class="input-text" name="profession" id="profession" placeholder="Profession" required/>
+          </div>
+          <div  class="info-item">
+            <label class="icon" for="email"><i class="fas fa-envelope"></i></label>
+            <input type="text" class="input-text" name="email" id="email" placeholder="Email" required/>
+          </div>
+          <div  class="info-item">
+            <label class="icon" for="phoneNumber"><i class="fas fa-phone"></i></label>
+            <input type="text" class="input-text" name="phoneNumber" id="phoneNumber" placeholder="Phone" required/>
+          </div>
+        </div>
+        <div>
+            <h3>Services: </h3>
+            <input type="checkbox" name="service" value="Software Development">Software Development   
+            <input type="checkbox" name="service" value="Mobile App Development">Mobile App Development<br>
+            <input type="checkbox" name="service" value="Website Development">Website Development
+            <input type="checkbox" name="service" value="E-commerce Development">E-commerce Development<br>
+            <input type="checkbox" name="service" value="Technology Consulting">Technology Consulting   
+            <input type="checkbox" name="service" value="Onsite & Remote Operation Support">Onsite & Remote Operation Support<br>
+        </div>
+        <div class="findUs-radio">
+          <h3>How did you hear about us?</h3>
+          <div> 
+            <input type="radio" class="findUs-choice" name="findUs" id="choice1" value="Social Media" onclick="notOther()">
+            <label for="choice1" class="radio">Social Media</label>
+          </div>
+          <div>
+            <input type="radio" class="findUs-choice" name="findUs" id="choice2" value="Online Ads" onclick="notOther()">
+            <label for="choice2" class="radio">Online Ads</label>
+          </div>
+          <div>
+            <input type="radio" class="findUs-choice" name="findUs" id="choice3" value="Newspaper" onclick="notOther()">
+            <label for="choice3" class="radio">Newspaper</label>
+          </div>
+          <div>
+            <label onclick="other()">
+                <input type="radio" id="other" value="other">
+                <label for="choice4" class="radio">Other</label>
+                <input type ="text" class="input-only-text" name="findUs" id="other_text">
+            </label>
+          </div>
+        </div>
+        <h3>How was you experience? If you have worked with us before.</h3>
+        <textarea name="review" cols="30" rows="5" maxlength="280"></textarea>
+        <input class="submit" type="submit" value="Submit">
+      </form>
+    </div>
+    <script src="{% static 'info/js/survey.js' %}"></script>
+  </body>
+</html>

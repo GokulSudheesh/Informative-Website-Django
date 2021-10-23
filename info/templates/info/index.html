@@ -1,0 +1,173 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>IO21</title>
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  <!-- CSS Style sheet -->
+  <link rel="stylesheet" href="{% static 'info/styles/index.css' %}">
+  <!-- Font Awesome -->
+  <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+  <!-- Bootstrap Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+  <section class="colored-section" id="title">
+    <div class="container-fluid">
+
+      <!-- Nav Bar -->
+      <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
+        <a href="#"><img class="navbar-brand" src="{% static '/info/images/IO21-logo1.png' %}" width=75em></a>
+        <!-- <a class="navbar-brand" href="">IO21</a> -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#services">Services</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#reviews">Reviews</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'info:survey' %}">Survey</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      
+
+      <!-- Title -->
+      <div class="row" id="main-title">
+        <div class="col-lg-6">
+          <h1 class="big-heading">Welcome to IO21</h1>
+          <p> IO21 FZ LLC is dedicated to developing innovative software that provides technological solutions to people's needs. <br>
+            We also offer software development services for business growth and more. Following our motto “powered by intellect, driven by value,” <br>
+            we ensure to deliver high-quality products, operate efficiently, and support continuous improvement.<br>
+          </p>
+        </div>
+      </div> 
+    </div>
+
+  </section>
+
+
+  <!-- Services -->
+
+  <section class="black-section" id="services">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-4 f-element">
+          <img src="{% static '/info/images/service-SoftwareDevelopment.png' %}" width="100px">
+          <h3 class="feature-title">Software Development</h3>
+          <p class="f-des">Our team manages the technological aspects of projects and creates advanced software that fits our client's needs.</p>
+        </div>
+        
+        <div class="col-lg-4 f-element">
+          <img src="{% static '/info/images/service-MobileAppDevelopment.png' %}" width="100px">
+          <h3 class="feature-title">Mobile App Development</h3>
+          <p class="f-des">We develop mobile applications that transfer our client’s ideas onto interactive and easy-to-use platforms that can engage with users.</p>
+        </div>
+
+        <div class="col-lg-4 f-element">
+          <img src="{% static '/info/images/service-WebDev.png' %}" width="100px">
+          <h3 class="feature-title">Website Development</h3>
+          <p class="f-des">We create websites that are not only visually appealing but also with the user in mind, delivering seamless user experience.</p>
+        </div>
+
+        <div class="col-lg-4 f-element">
+          <img src="{% static '/info/images/service-ECommerce.png' %}" width="100px">
+          <h3 class="feature-title">E-commerce Development</h3>
+          <p class="f-des">IO21 brings business goals to life through developing websites that enable our clients to effectively reach and market their products to customers.</p>
+        </div>
+        
+        <div class="col-lg-4 f-element">
+          <img src="{% static '/info/images/service-TechnologyConsulting.png' %}" width="100px">
+          <h3 class="feature-title">Technology Consulting</h3>
+          <p class="f-des">Our experts guide clients through their projects' technological needs and help them find the most effective way to achieve them.</p>
+        </div>
+
+        <div class="col-lg-4 f-element">
+          <img src="{% static '/info/images/service-OnsiteSupport.png' %}" width="100px">
+          <h3 class="feature-title">Onsite & Remote Operation Support</h3>
+          <p class="f-des">We provide both onsite and remote operation support to enhance your operation performance.</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- Testimonials -->
+  {% if reviews %}
+    <section class="colored-section" id="reviews">
+        <div id="testimonials-carousel" class="carousel slide" data-bs-ride="false" data-bs-pause="hover">
+        <div class="carousel-inner">
+            <div class="carousel-item active testimonial-item container-fluid">
+                <h2 class="testimonial-text">{{ reviews.0.review|slice:":50" }}...</h2>
+                <img class="testimonial-image" src="{% static 'info/images/profile-pic.png' %}" alt="dog-profile">
+                <em>{{ reviews.0.user.get_full_name }}, {{ reviews.0.user.profession }}</em>
+            </div> 
+            {% for review in reviews|slice:"1:3" %}
+                <div class="carousel-item testimonial-item container-fluid">
+                <h2 class="testimonial-text">{{ review.review|slice:":50" }}...</h2>
+                <img class="testimonial-image" src="{% static 'info/images/profile-pic.png' %}" alt="dog-profile">
+                <em>{{ review.user.get_full_name }}, {{ review.user.profession }}</em>
+                </div>  
+            {% endfor %}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#testimonials-carousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#testimonials-carousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+        <a class="test-link" href="{% url 'info:reviews' %}">Read more</a>
+        </div>
+    </section>
+  {% endif %}
+
+
+  <!-- Footer -->
+
+  <footer class="black-section" id="contact">
+    <h3 class="footer-header">Contact Us</h3>
+    <!-- <div class="row"> -->
+      <div>
+        <a href="https://www.linkedin.com/company/io21/"><i class="fab fa-linkedin footer-icon"></i></a>
+        <a href="https://www.facebook.com/IO21-104863968215638"><i class="fab fa-facebook-f footer-icon"></i></a>
+      </div>
+      <div>
+        <a href="https://www.instagram.com/io21_me"><i class="fab fa-instagram footer-icon"></i></a>
+        <a href="https://wa.me/message/UEAA66A44AHZA1"><i class="fab fa-whatsapp footer-icon"></i></a>
+      </div>
+      <p>Email: info@io21.me</p>
+      <p>WhatsApp Business: +971 58 510 7121</p>
+      <p>Phone: +971 4 454 0970</p>
+      <form action="mailto:info@io21.me" method="post" enctype="text/plain">
+        <label class="label-text" for="">Your name</label>
+        <input type="text" name="name" id=""><br>
+        <label class="label-text" for="">Your email</label>
+        <input type="email" name="email" id=""><br>
+        <label class="label-text" for="">Message</label><br>
+        <textarea name="message" id="" cols="30" rows="10"></textarea><br>
+        <input class="btn btn-outline-light btn-md" type="submit" name="">
+      </form>
+  </footer>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="{% static 'info/js/index.js' %}"></script>
+</body>
+</html>
